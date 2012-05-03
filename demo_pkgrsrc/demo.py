@@ -12,9 +12,9 @@ class ZippedFlask(Flask):
         return loaders.PackageLoader(self.PACKAGENAME)
 
     def send_static_file(self, filename):
-        filename = helpers.safe_join(self.static_resource, filename)
-        f = pkg_resources.resource_stream(self.PACKAGENAME, filename)
-        return helpers.send_file(f)
+        fname = helpers.safe_join(self.static_resource, filename)
+        f = pkg_resources.resource_stream(self.PACKAGENAME, fname)
+        return helpers.send_file(f, attachment_filename=filename)
             
 app = ZippedFlask(__name__)
 
